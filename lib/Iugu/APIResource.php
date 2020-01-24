@@ -18,16 +18,16 @@ class APIResource extends Iugu_Object
         $object_type = self::convertClassToObjectType();
         switch ($object_type) {
             // Add Exceptions as needed
-        case 'charge':
-            return $object_type;
-        case 'payment_token':
-            return $object_type;
-        case 'bank_verification':
-            return $object_type;
-        case 'marketplace':
-            return $object_type; // WORKAROUND MARKETPLACE
-        default:
-            return $object_type . 's';
+            case 'charge':
+                return $object_type;
+            case 'payment_token':
+                return $object_type;
+            case 'bank_verification':
+                return $object_type;
+            case 'marketplace':
+                return $object_type; // WORKAROUND MARKETPLACE
+            default:
+                return $object_type . 's';
         }
     }
 
@@ -87,15 +87,16 @@ class APIResource extends Iugu_Object
         return $response;
     }
 
-    protected function deleteAPI()
+    protected static function deleteAPI($attributes = [])
     {
-        if ($this['id'] == null) {
+
+        if ($attributes['id'] == null) {
             return false;
         }
 
         try {
             $response = self::API()->request(
-                'DELETE', static::url($this)
+                'DELETE', static::url($attributes['id'])
             );
 
             if (isset($response->errors)) {
@@ -180,6 +181,22 @@ class APIResource extends Iugu_Object
         }
 
         return true;
+    }
+
+    protected static function updateAPI($attributes = [])
+    {
+
+        $response = self::createFromResponse(
+            self::API()->request(
+                'PUT', static::url($attributes['id']), $attributes
+            )
+        );
+
+        foreach ($attributes as $attr => $value) {
+            $response[$attr] = $value;
+        }
+
+        return $response;
     }
 
 }

@@ -12,14 +12,19 @@ class Iugu_Invoice extends APIResource
         return self::fetchAPI($key);
     }
 
+    public static function update($attributes = [])
+    {
+        return self::updateAPI($attributes);
+    }
+
     public function save()
     {
         return $this->saveAPI();
     }
 
-    public function delete()
+    public static function delete($attributes = [])
     {
-        return $this->deleteAPI();
+        return self::deleteAPI($attributes);
     }
 
     public function refresh()
@@ -44,23 +49,43 @@ class Iugu_Invoice extends APIResource
         return Iugu_Customer::fetch($this->customer_id);
     }
 
-    public function cancel()
+    public static function email($attributes = [])
     {
-        if ($this->is_new()) {
+        if ($attributes['id'] == null) {
             return false;
         }
 
         try {
             $response = self::API()->request(
-        'PUT',
-        static::url($this).'/cancel'
-      );
+                'POST',
+                static::url($attributes['id']).'/send_email'
+            );
+
             if (isset($response->errors)) {
-                throw new IuguRequestException($response->errors);
+                throw new IuguRequestException();
             }
-            $new_object = self::createFromResponse($response);
-            $this->copy($new_object);
-            $this->resetStates();
+        } catch (Exception $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static function cancel($attributes = [])
+    {
+        if ($attributes['id'] == null) {
+            return false;
+        }
+
+        try {
+            $response = self::API()->request(
+                'PUT',
+                static::url($attributes['id']).'/cancel'
+            );
+
+            if (isset($response->errors)) {
+                throw new IuguRequestException();
+            }
         } catch (Exception $e) {
             return false;
         }
@@ -76,9 +101,9 @@ class Iugu_Invoice extends APIResource
 
         try {
             $response = self::API()->request(
-        'POST',
-        static::url($this).'/refund'
-      );
+                'POST',
+                static::url($this).'/refund'
+            );
             if (isset($response->errors)) {
                 throw new IuguRequestException($response->errors);
             }
@@ -91,27 +116,47 @@ class Iugu_Invoice extends APIResource
 
         return true;
     }
-	
-  public function duplicate($options=Array())
-  {
-		if ($this->is_new()) return false;
 
-		try {
-			$response = self::API()->request(
-				"POST",
-				static::url($this) . "/duplicate",
-				$options
-			);
-			if (isset($response->errors)) {
-				throw new IuguRequestException( $response->errors );
-			}
-			return self::createFromResponse($response);
-		} catch (Exception $e) {
-			return false;
-		}
+    /*public static function duplicate($attributes = [])
+    {
 
-	return true;
-  }  
+          if ($attributes['id'] == null) {
+              return false;
+          }
+
+          try {
+              $response = self::API()->request(
+                  "POST",
+                  static::url($attributes['id']) . "/duplicate"
+              );
+
+          } catch (Exception $e) {
+              return false;
+          }
+
+      return $response;
+    }  */
+    public static function duplicate($options=[])
+    {
+        if ($options['id'] == null) {
+            return false;
+        }
+
+        try {
+            $response = self::API()->request(
+                "POST",
+                static::url($options['id']) . "/duplicate",
+                $options
+            );
+            if (isset($response->errors)) {
+                throw new IuguRequestException( $response->errors );
+            }
+            return self::createFromResponse($response);
+        } catch (Exception $e) {
+            return false;
+        }
+        return true;
+    }
 
 
     public function capture()
