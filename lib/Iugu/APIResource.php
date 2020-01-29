@@ -141,7 +141,7 @@ class APIResource extends Iugu_Object
     {
         try {
             $response = static::API()->request(
-                'GET', static::url($key)
+                'GET', static::url($key.'/logs')
             );
 
             return self::createFromResponse($response);
