@@ -137,6 +137,19 @@ class APIResource extends Iugu_Object
         }
     }
 
+    protected static function fetchLogsAPI($key)
+    {
+        try {
+            $response = static::API()->request(
+                'GET', static::url($key)
+            );
+
+            return self::createFromResponse($response);
+        } catch (IuguObjectNotFound $e) {
+            throw new IuguObjectNotFound(self::convertClassToObjectType(get_called_class()) . ':' . ' not found');
+        }
+    }
+
     protected function refreshAPI()
     {
         if ($this->is_new()) {

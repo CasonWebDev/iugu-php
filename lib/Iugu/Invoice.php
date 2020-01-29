@@ -12,6 +12,11 @@ class Iugu_Invoice extends APIResource
         return self::fetchAPI($key);
     }
 
+    public static function fetchLogs($key)
+    {
+        return self::fetchLogsAPI($key, 'logs');
+    }
+
     public static function update($attributes = [])
     {
         return self::updateAPI($attributes);
