@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2df3f265-f1e0-4866-9657-fd2520c36863" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/Iugu/Refund.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Iugu.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Iugu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +55,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605200030411</updated>
-      <workItem from="1605200031588" duration="802000" />
+      <workItem from="1605200031588" duration="981000" />
     </task>
     <servers />
   </component>
@@ -82,5 +82,9 @@
       <screen x="-1360" y="-73" width="1360" height="728" />
     </state>
     <state x="-931" y="16" key="com.jetbrains.php.test.PhpNewTestDialog/0.0.1366.728/-1360.-73.1360.728@-1360.-73.1360.728" timestamp="1605200084932" />
+    <state x="-972" y="8" width="583" height="566" key="find.popup" timestamp="1605200843152">
+      <screen x="-1360" y="-73" width="1360" height="728" />
+    </state>
+    <state x="-972" y="8" width="583" height="566" key="find.popup/0.0.1366.728/-1360.-73.1360.728@-1360.-73.1360.728" timestamp="1605200843152" />
   </component>
 </project>
