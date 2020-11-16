@@ -1,13 +1,16 @@
 <?php
 
-class Iugu_Refund extends APIResource
-{
-  public function create($attributes = [])
+class Iugu_Refund extends APIResource {
+
+  const URL_REFUND_BASE = 'https://api.iugu.com/v1/invoices/' ;
+
+  public static function create(Array $attributes)
   {
-    $result = self::createAPI($attributes);
-    if (!isset($result->success) && !isset($result->errors)) {
-      $result->success = false;
-    }
-    return $result;
+
+    return self::API()->request(
+      'POST',
+      self::URL_REFUND_BASE.$attributes['id'].'/refund',
+      [$attributes['partial_value_refund_cents']]
+    );
   }
 }
