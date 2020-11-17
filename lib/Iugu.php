@@ -20,5 +20,6 @@ require( $baseDirectory . "/Iugu/Charge.php" );
 require( $baseDirectory . "/Iugu/Invoice.php" );
 require( $baseDirectory . "/Iugu/Subscription.php" );
 require( $baseDirectory . "/Iugu/Plan.php" );
+require( $baseDirectory . "/Iugu/Refund.php");
 
 require( $baseDirectory . "/Iugu/Factory.php" );
